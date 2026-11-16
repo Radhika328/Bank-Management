@@ -4,7 +4,7 @@
 #include "transaction.h"
 
 // Deposit money
-int deposit(Account *bank_account, double deposit_amount)
+int deposit(Account *bank_account, double amount)
 {
     if (bank_account == NULL)
     {
@@ -14,7 +14,7 @@ int deposit(Account *bank_account, double deposit_amount)
     {
         return 0;
     }
-    else if (deposit_amount <= 0 || !isfinite(deposit_amount))
+    else if (amount <= 0 || !isfinite(amount))
     {
         return 0;
     }
@@ -22,17 +22,16 @@ int deposit(Account *bank_account, double deposit_amount)
     {
         return 0;
     }
-    else if (!isfinite(bank_account->balance + deposit_amount))
+    else if (!isfinite(bank_account->balance + amount))
     {
         return 0;
     }
     else
     {
-        bank_account->balance = bank_account->balance + deposit_amount;
+        bank_account->balance = bank_account->balance + amount;
         return 1;
     }
 }
-
 
 // Withdraw money
 int withdraw(Account *bank_account, double withdrawal_amount)
@@ -64,10 +63,8 @@ int withdraw(Account *bank_account, double withdrawal_amount)
     }
 }
 
-
 // Transfer money
-int transfer(Account *source_account, Account *destination_account,
-             double transfer_amount)
+int transfer(Account *source_account, Account *destination_account, double transfer_amount)
 {
     if (source_account == NULL || destination_account == NULL)
     {
